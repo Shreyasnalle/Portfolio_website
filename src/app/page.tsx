@@ -1,27 +1,13 @@
-import Image from "next/image";
+import { BlueprintGrid } from "@/components/BlueprintGrid";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black min-h-screen">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left mt-8">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              src/app/page.tsx
-            </code>{" "}
-            file.
-          </h1>
-        </div>
-      </main>
-    </div>
+    <main className="relative min-h-screen w-full overflow-x-hidden bg-white text-zinc-900 transition-colors duration-300 dark:bg-black dark:text-zinc-50">
+      {/* Blueprint Grid Lines (Vertical & Horizontal Micro Dots + Intersection Nodes) */}
+      <BlueprintGrid leftMargin="30%" rightMargin="30%" />
+
+      {/* Content Container */}
+      <div className="relative z-10 mx-auto min-h-screen w-full max-w-7xl md:px-[30%]" />
+    </main>
   );
 }
