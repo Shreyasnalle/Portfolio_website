@@ -46,28 +46,16 @@ export function BlueprintGrid({
         style={{ right: rightMargin, ...verticalDottedMask }}
       />
 
-      {/* Horizontal Lines - Ultra-fine Micro Dots */}
+      {/* Horizontal Line - 22vh Baseline */}
       <div
         className="absolute left-0 right-0 top-[22vh] h-0 border-b border-black/30 dark:border-white/[0.15]"
         style={horizontalDottedMask}
       />
-      <div
-        className="absolute left-0 right-0 top-[calc(22vh+112px)] h-0 border-b border-black/30 dark:border-white/[0.15]"
-        style={horizontalDottedMask}
-      />
-      <div
-        className="absolute left-0 right-0 top-[calc(22vh+360px)] h-0 border-b border-black/30 dark:border-white/[0.15]"
-        style={horizontalDottedMask}
-      />
 
-      {/* Ultra-Tiny Solid Intersection Nodes */}
+      {/* Ultra-Tiny Solid Intersection Nodes at 22vh */}
       {[
         { top: "22vh", left: leftMargin },
         { top: "22vh", right: rightMargin },
-        { top: "calc(22vh + 112px)", left: leftMargin },
-        { top: "calc(22vh + 112px)", right: rightMargin },
-        { top: "calc(22vh + 360px)", left: leftMargin },
-        { top: "calc(22vh + 360px)", right: rightMargin },
       ].map((pos, i) => (
         <div
           key={i}

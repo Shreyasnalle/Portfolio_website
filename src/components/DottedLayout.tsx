@@ -3,7 +3,10 @@
 import React from "react";
 import { DottedBackground } from "@/components/DottedBackground";
 import { BlueprintGrid } from "@/components/BlueprintGrid";
+import { DottedDivider } from "@/components/DottedDivider";
 import { cn } from "@/lib/utils";
+
+export { DottedDivider };
 
 interface DottedLayoutProps {
   children?: React.ReactNode;
