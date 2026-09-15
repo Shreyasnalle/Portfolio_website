@@ -55,7 +55,7 @@ export function OpenSourceSection() {
   return (
     <section id="opensource" className="scroll-mt-24 w-full">
       {/* Header Container with Title on the left and Toggle on the right */}
-      <div className="px-4 py-3 flex items-center justify-between gap-4">
+      <div className="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <PixelHeading
           mode="random"
           as="h1"
@@ -65,7 +65,7 @@ export function OpenSourceSection() {
         </PixelHeading>
 
         {/* Filter Toggle with sliding pill */}
-        <div className="flex items-center gap-2 relative z-20 group">
+        <div className="flex items-center gap-2 relative z-20 group self-start sm:self-auto">
           <div className="absolute -inset-[5px] border border-black/5 dark:border-white/5 rounded-[11px] pointer-events-none transition-colors duration-300 group-hover:border-black/10 dark:group-hover:border-white/10" />
           <div className="relative grid grid-cols-3 p-1 bg-zinc-50 dark:bg-[#09090b] rounded-[6px] border border-black/10 dark:border-white/10 shadow-sm shadow-black/10 dark:shadow-lg dark:shadow-black/80 w-fit select-none">
             {/* Sliding Pill Background */}

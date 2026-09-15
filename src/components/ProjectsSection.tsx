@@ -277,7 +277,7 @@ export function ProjectsSection() {
         </div>
 
         {/* Row 2 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8 px-4 pt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8 px-4 pt-0 md:pt-4">
           <ProjectCard project={projects[2]} />
         </div>
       </div>

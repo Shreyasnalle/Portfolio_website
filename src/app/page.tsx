@@ -16,11 +16,11 @@ import bannerImg from "@/images/banner.png";
 export default function Home() {
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden bg-white dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100">
-      {/* Blueprint Grid Lines (Vertical Micro Dots + 22vh Baseline + Nodes) */}
-      <BlueprintGrid leftMargin="30%" rightMargin="30%" />
+      {/* Main Column bounded inside responsive container */}
+      <div className="relative w-full max-w-[768px] mx-auto flex flex-col z-20 pb-16">
+        {/* Blueprint Grid Lines (Vertical Micro Dots + 22vh Baseline + Nodes) */}
+        <BlueprintGrid />
 
-      {/* Main Column bounded inside the 30% left & 30% right dotted lines */}
-      <div className="relative ml-0 mr-0 md:ml-[30%] md:mr-[30%] flex flex-col z-20 pb-16">
         {/* Block 1: Panoramic Banner (Height 22vh, exact cloned repo blur & fade values) */}
         <div className="relative h-[22vh] w-full overflow-hidden bg-white dark:bg-[#09090b] shadow-[0_4px_12px_rgba(2,6,23,0.04)] dark:shadow-none">
           <Image
@@ -29,7 +29,7 @@ export default function Home() {
             fill
             priority
             fetchPriority="high"
-            sizes="(min-width: 768px) 40vw, 100vw"
+            sizes="(min-width: 768px) 768px, 100vw"
             quality={90}
             placeholder="blur"
             className="object-cover object-center"

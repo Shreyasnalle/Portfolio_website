@@ -233,8 +233,8 @@ export function GithubGraph() {
 
       {/* Graph content */}
       <div className="relative px-4 py-4">
-        <div className="w-full">
-          <div>
+        <div className="w-full overflow-x-auto overflow-y-hidden pb-1">
+          <div className="min-w-[620px]">
             <div className="mb-2 grid grid-cols-[repeat(53,minmax(0,1fr))] text-[10px] text-zinc-600 dark:text-zinc-400 font-medium">
               {monthLabels.map((m) => (
                 <span

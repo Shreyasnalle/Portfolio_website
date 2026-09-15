@@ -7,31 +7,31 @@ import SoftPillButton from "@/components/ui/soft-pill-button";
 
 export function ProfileHeader() {
   return (
-    <div className="relative flex min-h-[112px] py-4 w-full items-center justify-between px-4 z-20">
-      <div className="flex items-center gap-4 sm:gap-5">
+    <div className="relative flex min-h-[112px] py-4 w-full items-center justify-between gap-2 sm:gap-4 px-4 z-20">
+      <div className="flex items-center gap-3 sm:gap-5 min-w-0">
         <div className="relative p-[3px] rounded-[6px] sm:rounded-[8px] border-[1.5px] border-black/30 dark:border-white/[0.15] shrink-0">
           {/* The inner image */}
-          <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-[3px] sm:rounded-[5px] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
+          <div className="relative w-14 h-14 sm:w-20 sm:h-20 rounded-[3px] sm:rounded-[5px] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
             <Image
               src={pfpImage}
               alt="Profile"
               fill
               priority
-              sizes="(min-width: 640px) 80px, 64px"
+              sizes="(min-width: 640px) 80px, 56px"
               className="object-cover object-center"
             />
           </div>
         </div>
 
         {/* Pixel font name, age, and Resume button */}
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center min-w-0">
           <PixelHeading
             mode="random"
             autoPlay={true}
             cycleInterval={180}
             staggerDelay={40}
             as="h1"
-            className="text-[20px] sm:text-[24px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight leading-none mb-0.5 cursor-pointer whitespace-nowrap"
+            className="text-[18px] sm:text-[24px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight leading-none mb-0.5 cursor-pointer whitespace-nowrap"
           >
             Shreyas Nalle
           </PixelHeading>
