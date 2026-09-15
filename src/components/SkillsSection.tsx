@@ -3,20 +3,24 @@ import { DottedDivider } from "@/components/DottedDivider";
 import { GithubGraph } from "@/components/GithubGraph";
 
 const skills = [
-  { name: "HTML5", icon: "html5" },
-  { name: "CSS3", icon: "css3" },
+  { name: "HTML", icon: "html5" },
+  { name: "CSS", icon: "css" },
   { name: "JavaScript", icon: "javascript" },
   { name: "TypeScript", icon: "typescript" },
+  { name: "React", icon: "react" },
   { name: "Next.js", icon: "nextdotjs" },
-  { name: "TailwindCSS", icon: "tailwindcss" },
+  { name: "Tailwind CSS", icon: "tailwindcss" },
   { name: "shadcn/ui", icon: "shadcnui" },
+  { name: "Motion", icon: "framer" },
+  { name: "GSAP", icon: "gsap" },
+  { name: "Figma", icon: "figma" },
   { name: "Node.js", icon: "nodedotjs" },
   { name: "Express.js", icon: "express" },
-  { name: "Python", icon: "python" },
   { name: "FastAPI", icon: "fastapi" },
+  { name: "Python", icon: "python" },
   { name: "MySQL", icon: "mysql" },
-  { name: "PostgreSQL", icon: "postgresql" },
   { name: "MongoDB", icon: "mongodb" },
+  { name: "PostgreSQL", icon: "postgresql" },
   { name: "LangChain", icon: "langchain" },
   { name: "LangGraph", icon: "langchain" },
   { name: "PyTorch", icon: "pytorch" },
@@ -24,13 +28,15 @@ const skills = [
   { name: "Jupyter", icon: "jupyter" },
   { name: "Supabase", icon: "supabase" },
   { name: "Render", icon: "render" },
-  { name: "Railway", icon: "railway" },
   { name: "Vercel", icon: "vercel" },
   { name: "Conda", icon: "anaconda" },
+  { name: "Resend", icon: "resend" },
   { name: "Anaconda", icon: "anaconda" },
   { name: "Git", icon: "git" },
   { name: "Docker", icon: "docker" },
   { name: "Redis", icon: "redis" },
+  { name: "Bun", icon: "bun" },
+  { name: "Linux", icon: "linux" },
 ];
 
 export function SkillsSection() {
@@ -40,8 +46,8 @@ export function SkillsSection() {
       <div className="px-4 py-3">
         <PixelHeading
           mode="uniform"
-          as="h3"
-          className="text-[16px] sm:text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"
+          as="h2"
+          className="text-[16px] sm:text-[15px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"
         >
           Skills and Technologies
         </PixelHeading>

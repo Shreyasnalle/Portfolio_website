@@ -57,9 +57,9 @@ export function OpenSourceSection() {
       {/* Header Container with Title on the left and Toggle on the right */}
       <div className="px-4 py-3 flex items-center justify-between gap-4">
         <PixelHeading
-          mode="uniform"
-          as="h3"
-          className="text-[16px] sm:text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"
+          mode="random"
+          as="h1"
+          className="text-[16px] sm:text-[22px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"
         >
           Open Source Contribution
         </PixelHeading>

@@ -10,6 +10,10 @@ import {
 } from "geist/font/pixel";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -25,7 +29,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${GeistSans.variable} ${GeistMono.variable} ${GeistPixelSquare.variable} ${GeistPixelGrid.variable} ${GeistPixelCircle.variable} ${GeistPixelTriangle.variable} ${GeistPixelLine.variable}`}
+      className={cn(GeistSans.variable, GeistMono.variable, GeistPixelSquare.variable, GeistPixelGrid.variable, GeistPixelCircle.variable, GeistPixelTriangle.variable, GeistPixelLine.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-screen bg-white dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 antialiased font-sans">
         <ThemeProvider

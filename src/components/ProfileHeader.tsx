@@ -1,5 +1,5 @@
 import Image from "next/image";
-import pfpImage from "@/images/pfp (1).jpg";
+import pfpImage from "@/images/pfp.jpg";
 import { PixelHeading } from "@/components/ui/pixel-heading";
 import { VisitorCounter } from "@/components/VisitorCounter";
 import { CurrentTime } from "@/components/CurrentTime";

@@ -10,68 +10,62 @@ interface ProjectItem {
   title: string;
   description: string;
   image: string;
+  backgroundImage?: string;
+  objectFit?: string;
   hasPin?: boolean;
   tech: { name: string; icon?: string; label?: string }[];
 }
 
 const projects: ProjectItem[] = [
   {
-    title: "VengenceUI",
+    title: "SIMPLY",
     description:
-      "VengenceUI helps you to build your landing page by providing you animated beautiful components",
-    image: "/projects/vengenceui.png",
-    hasPin: true,
+      "An in-tab YouTube video assistant that eliminates tab switching while learning online. It retains chat history for each video. Currently working to enhance this product with GenAI and agentic features",
+    image: "/projects/simply.png",
+    backgroundImage: "/images/background2.jpeg",
+    objectFit: "object-cover object-top",
+    tech: [
+      { name: "JavaScript", icon: "javascript" },
+      { name: "Python", icon: "python" },
+      { name: "FastAPI", icon: "fastapi" },
+      { name: "React", icon: "react" },
+      { name: "CSS", icon: "css" },
+    ],
+  },
+  {
+    title: "GenAI Fraud Detection",
+    description:
+      "A multi GNN heterogeneous model for payment fraud detection, integrated into a continuous loop of GenAI attack generation, defense and fine-tuning.",
+    image: "/projects/genai-fraud.png",
+    backgroundImage: "/images/background3.jpeg",
+    objectFit: "object-cover object-top",
+    tech: [
+      { name: "Python", icon: "python" },
+      { name: "FastAPI", icon: "fastapi" },
+      { name: "PyTorch", icon: "pytorch" },
+      { name: "scikit-learn", icon: "scikitlearn" },
+      { name: "Anaconda", icon: "anaconda" },
+      { name: "React", icon: "react" },
+      { name: "JavaScript", icon: "javascript" },
+      { name: "CSS", icon: "css" },
+    ],
+  },
+  {
+    title: "Rampling",
+    description:
+      "An automated backend reliability checker with integrated agents that identify and pinpoint exact potholes in the codebase.",
+    image: "/projects/rampling.png",
+    backgroundImage: "/images/background2.jpeg",
+    objectFit: "object-cover object-top",
     tech: [
       { name: "Next.js", icon: "nextdotjs" },
       { name: "React", icon: "react" },
       { name: "TypeScript", icon: "typescript" },
       { name: "Tailwind CSS", icon: "tailwindcss" },
-      { name: "Framer Motion", icon: "framer" },
-    ],
-  },
-  {
-    title: "Scribble3D",
-    description:
-      "Turn your sketches into 3D objects and worlds — no 3D skills required.",
-    image: "/projects/scribble3d.png",
-    tech: [
-      { name: "Next.js", icon: "nextdotjs" },
-      { name: "tldraw", icon: "tldraw" },
-      { name: "Three.js", icon: "threedotjs" },
-      { name: "TypeScript", icon: "typescript" },
+      { name: "Python", icon: "python" },
       { name: "FastAPI", icon: "fastapi" },
-      { name: "Gemini", icon: "googlegemini" },
-    ],
-  },
-  {
-    title: "Blueprint",
-    description:
-      "Blueprint is an AI UI builder that turns prompts into structured, production-ready interfaces.",
-    image: "/projects/blueprint.png",
-    tech: [
-      { name: "Next.js", icon: "nextdotjs" },
-      { name: "TypeScript", icon: "typescript" },
-      { name: "Tailwind CSS", icon: "tailwindcss" },
-      { name: "Prisma", icon: "prisma" },
-      { name: "Bun", icon: "bun" },
-      { name: "Node.js", icon: "nodedotjs" },
+      { name: "LangGraph", icon: "langchain" },
       { name: "LangChain", icon: "langchain" },
-      { name: "RAG", label: "RAG" },
-    ],
-  },
-  {
-    title: "Inquiro",
-    description:
-      "Inquiro is an AI-powered search engine that helps you find information on the internet",
-    image: "/projects/inquiro.png",
-    tech: [
-      { name: "Next.js", icon: "nextdotjs" },
-      { name: "TypeScript", icon: "typescript" },
-      { name: "Radix UI", icon: "radixui" },
-      { name: "Node.js", icon: "nodedotjs" },
-      { name: "Gemini", icon: "googlegemini" },
-      { name: "LangChain", icon: "langchain" },
-      { name: "LangGraph", label: "LangGraph" },
     ],
   },
 ];
@@ -88,6 +82,25 @@ function ProjectCard({ project }: { project: ProjectItem }) {
         whileHover="hover"
         animate="rest"
       >
+        {/* Background Image on Hover */}
+        {project.backgroundImage && (
+          <motion.div
+            className="absolute inset-0 pointer-events-none z-0"
+            style={{
+              backgroundImage: `url('${project.backgroundImage}')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            variants={{
+              rest: { opacity: 0, scale: 1 },
+              hover: { opacity: 1, scale: 1.05 },
+            }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+          >
+            <div className="absolute inset-0 bg-black/10 dark:bg-black/30" />
+          </motion.div>
+        )}
+
         <div className="flex items-center justify-end z-10 min-h-[24px]">
           {project.hasPin && (
             <div className="w-6 h-6 rounded-[6px] bg-transparent border border-zinc-200/80 dark:border-zinc-800/80 flex items-center justify-center text-zinc-400 dark:text-zinc-500">
@@ -116,13 +129,13 @@ function ProjectCard({ project }: { project: ProjectItem }) {
           }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
         >
-          <div className="size-full overflow-hidden rounded-t-[9px]">
+          <div className="size-full overflow-hidden rounded-t-[9px] relative">
             <Image
               src={project.image}
               alt={`${project.title} preview`}
               width={600}
               height={400}
-              className="size-full object-cover"
+              className={`size-full ${project.objectFit || "object-cover object-top"}`}
             />
           </div>
         </motion.div>
@@ -193,9 +206,9 @@ export function ProjectsSection() {
       {/* Header Container */}
       <div className="px-4 py-3">
         <PixelHeading
-          mode="uniform"
-          as="h3"
-          className="text-[16px] sm:text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"
+          mode="random"
+          as="h1"
+          className="text-[16px] sm:text-[22px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"
         >
           Projects
         </PixelHeading>
@@ -205,10 +218,10 @@ export function ProjectsSection() {
       <DottedDivider showNodes={true} />
 
       {/* Grid Container */}
-      <div className="relative pt-6 pb-6 px-4">
+      <div className="relative pt-6 pb-6">
         {/* Center Vertical Guideline */}
         <div
-          className="absolute top-0 bottom-6 left-1/2 w-0 border-r border-black/30 dark:border-white/[0.15] pointer-events-none -translate-x-1/2 hidden md:block"
+          className="absolute top-0 bottom-0 left-1/2 w-0 border-r border-black/30 dark:border-white/[0.15] pointer-events-none -translate-x-1/2 hidden md:block"
           style={{
             maskImage:
               "repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)",
@@ -218,45 +231,24 @@ export function ProjectsSection() {
         />
 
         {/* Row 1 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8 px-4 pb-8">
           <ProjectCard project={projects[0]} />
           <ProjectCard project={projects[1]} />
         </div>
 
-        {/* Row Divider */}
+        {/* Row Divider spanning full column width */}
         <div className="relative w-full h-0 my-4 hidden md:block">
           <DottedDivider showNodes={true} />
           {/* Center intersection dot */}
-          <div className="absolute top-0 left-1/2 w-[3px] h-[3px] rounded-full bg-black/60 dark:bg-white/[0.4] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20 hidden md:block" />
+          <div
+            className="absolute top-0 left-1/2 z-40 hidden h-[3px] w-[3px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/60 dark:bg-white/[0.4] md:block pointer-events-none"
+            aria-hidden="true"
+          />
         </div>
 
         {/* Row 2 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8 pt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8 px-4 pt-4">
           <ProjectCard project={projects[2]} />
-          <ProjectCard project={projects[3]} />
-        </div>
-      </div>
-
-      {/* View All Button sitting directly on the bottom dotted divider line */}
-      <div className="relative w-full">
-        <DottedDivider showNodes={true} />
-        <div className="flex justify-center -mt-[19px] pb-4 relative z-20">
-          <button
-            type="button"
-            className="relative flex items-center gap-1.5 px-4 py-2 bg-zinc-50 hover:bg-zinc-100 dark:bg-[#09090b] dark:hover:bg-[#121214] text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-[6px] text-[13px] font-medium transition-all duration-300 border border-black/10 dark:border-white/10 shadow-sm cursor-pointer"
-          >
-            View All
-            <svg
-              viewBox="0 0 24 24"
-              className="w-3.5 h-3.5 text-zinc-500 transition-colors"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-            >
-              <line x1="7" y1="17" x2="17" y2="7"></line>
-              <polyline points="7 7 17 7 17 17"></polyline>
-            </svg>
-          </button>
         </div>
       </div>
     </section>

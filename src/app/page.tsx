@@ -8,6 +8,7 @@ import { AboutSection } from "@/components/AboutSection";
 import { SkillsSection } from "@/components/SkillsSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { OpenSourceSection } from "@/components/OpenSourceSection";
+import { QuoteSection } from "@/components/QuoteSection";
 import { FooterBackground } from "@/components/FooterBackground";
 import { BannerWind } from "@/components/BannerWind";
 import bannerImg from "@/images/banner.png";
@@ -91,10 +92,26 @@ export default function Home() {
         {/* Dotted Divider below Skills Section */}
         <DottedDivider showNodes={true} />
 
+        {/* Gap below Skills Section with exactly 3 lines of dots */}
+        <div className="relative h-[24px] w-full overflow-visible">
+          <TextureOverlay />
+        </div>
+
+        {/* Dotted Divider above Projects Section */}
+        <DottedDivider showNodes={true} />
+
         {/* Projects Section */}
         <ProjectsSection />
 
         {/* Dotted Divider below Projects Section */}
+        <DottedDivider showNodes={true} />
+
+        {/* Gap above Open Source Contribution Section */}
+        <div className="relative h-[24px] w-full overflow-visible">
+          <TextureOverlay />
+        </div>
+
+        {/* Dotted Divider above Open Source Contribution Section */}
         <DottedDivider showNodes={true} />
 
         {/* Open Source Contribution Section */}
@@ -103,21 +120,16 @@ export default function Home() {
         {/* Dotted Divider below Open Source Contribution Section */}
         <DottedDivider showNodes={true} />
 
-        {/* Minimal Quote Section */}
-        <div className="flex flex-col items-center justify-center relative py-12 px-4">
-          <div className="max-w-[480px] w-full flex flex-col items-center">
-            <h3 className="text-[16px] font-medium text-center leading-relaxed text-zinc-500 dark:text-zinc-400 mb-6 italic">
-              &quot;Do so much work that it would be unreasonable
-              <br className="hidden md:block" /> for you to not be successful.&quot;
-            </h3>
-
-            <div className="flex items-center gap-3 text-[10px] font-medium tracking-[0.2em] text-zinc-400 dark:text-zinc-600 uppercase">
-              <div className="w-4 h-[1px] bg-zinc-200 dark:bg-zinc-800" />
-              ALEX HORMOZI
-              <div className="w-4 h-[1px] bg-zinc-200 dark:bg-zinc-800" />
-            </div>
-          </div>
+        {/* Gap above Quote Section */}
+        <div className="relative h-[24px] w-full overflow-visible">
+          <TextureOverlay />
         </div>
+
+        {/* Dotted Divider above Quote Section */}
+        <DottedDivider showNodes={true} />
+
+        {/* Dynamic Encrypted Text Rotating Quotes Section */}
+        <QuoteSection />
 
         {/* Dotted Divider below Quote Section */}
         <DottedDivider showNodes={true} />

@@ -218,8 +218,8 @@ export function GithubGraph() {
       <div className="px-4 py-3 flex items-center justify-between gap-3">
         <PixelHeading
           mode="uniform"
-          as="h3"
-          className="text-[16px] sm:text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"
+          as="h2"
+          className="text-[16px] sm:text-[15px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"
         >
           GitHub Activity
         </PixelHeading>
@@ -285,7 +285,7 @@ export function GithubGraph() {
           </div>
         </div>
 
-        <div className="mt-3 flex items-center justify-between gap-3">
+        <div className="mt-3 flex items-center justify-end gap-2">
           <span className="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">
             Less active
           </span>
@@ -297,10 +297,10 @@ export function GithubGraph() {
                 className={`size-2 rounded-[2px] opacity-80 dark:opacity-70 ${level.cell}`}
               />
             ))}
-            <span className="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">
-              More active
-            </span>
           </div>
+          <span className="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">
+            More active
+          </span>
         </div>
 
         {tooltip && (
