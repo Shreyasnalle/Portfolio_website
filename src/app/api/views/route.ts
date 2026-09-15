@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 const CACHE_PATH = path.join(process.cwd(), "src/components/views-cache.json");
-const BASELINE_COUNT = 21030;
+const BASELINE_COUNT = 0;
 
 function getLocalCount(): number {
   try {
@@ -37,15 +37,6 @@ export async function GET(request: NextRequest) {
   if (shouldIncrement) {
     currentCount += 1;
     saveLocalCount(currentCount);
-
-    // Sync in the background with cloud counter
-    try {
-      fetch("https://hits.sh/shreyasnalle.vercel.app/views.svg", {
-        headers: { "User-Agent": "portfolio-views-sync" },
-      }).catch(() => {});
-    } catch {
-      // Ignore background sync errors
-    }
   }
 
   return NextResponse.json(

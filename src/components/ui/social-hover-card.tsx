@@ -98,6 +98,51 @@ export default function SocialHoverCard({
     };
   }, [isOpen, hasFetched, socialName]);
 
+  if (socialName === "Gmail") {
+    return (
+      <HoverCard.Root
+        open={isOpen}
+        onOpenChange={setIsOpen}
+        openDelay={60}
+        closeDelay={120}
+      >
+        <HoverCard.Trigger asChild>
+          <span className="inline-block">{children}</span>
+        </HoverCard.Trigger>
+        <AnimatePresence>
+          {isOpen && (
+            <HoverCard.Portal forceMount>
+              <HoverCard.Content
+                asChild
+                forceMount
+                side="bottom"
+                align="center"
+                sideOffset={8}
+                className="z-50 select-none outline-none"
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 4, scale: 0.985 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 3, scale: 0.985 }}
+                  transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                  className={cn(
+                    "px-3.5 py-2 rounded-lg shadow-xl overflow-hidden",
+                    "bg-white dark:bg-[#0c0c0e] border border-black/10 dark:border-white/10",
+                    "text-zinc-900 dark:text-zinc-100 select-none shadow-[0_12px_28px_rgba(0,0,0,0.15)] dark:shadow-[0_16px_32px_rgba(0,0,0,0.7)]"
+                  )}
+                >
+                  <span className="text-[12px] sm:text-[13px] font-mono text-zinc-800 dark:text-zinc-200 select-all">
+                    shreyas.nalle7@gmail.com
+                  </span>
+                </motion.div>
+              </HoverCard.Content>
+            </HoverCard.Portal>
+          )}
+        </AnimatePresence>
+      </HoverCard.Root>
+    );
+  }
+
   const currentProfile = profile || defaultSocialProfiles[socialName];
   if (!currentProfile) {
     return <>{children}</>;

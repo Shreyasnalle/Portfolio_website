@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface MenuBarProps {
@@ -12,10 +11,19 @@ const navItems = [
   { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
   { name: "Open Source", href: "#opensource" },
-  { name: "Hackathons", href: "#hackathons" },
 ];
 
 export function MenuBar({ className = "" }: MenuBarProps) {
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace("#", "");
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.pushState(null, "", href);
+    }
+  };
+
   return (
     <div
       className={`relative flex w-full items-center justify-between px-4 py-2.5 transition-colors duration-300 ${className}`}
@@ -31,12 +39,13 @@ export function MenuBar({ className = "" }: MenuBarProps) {
                 |
               </span>
             )}
-            <Link
+            <a
               href={item.href}
-              className="text-zinc-600 transition-colors duration-200 hover:text-black dark:text-zinc-400 dark:hover:text-white"
+              onClick={(e) => handleScroll(e, item.href)}
+              className="text-zinc-600 transition-colors duration-200 hover:text-black dark:text-zinc-400 dark:hover:text-white cursor-pointer"
             >
               {item.name}
-            </Link>
+            </a>
           </React.Fragment>
         ))}
       </nav>

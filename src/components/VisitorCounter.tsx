@@ -6,12 +6,12 @@ export function VisitorCounter() {
   const [count, setCount] = useState<number | null>(null);
 
   useEffect(() => {
-    const sessionKey = "portfolio_session_visited_v1";
-    const cachedCountKey = "portfolio_cached_view_count";
-    const hasVisitedThisSession = sessionStorage.getItem(sessionKey);
+    const sessionKey = "portfolio_session_visited_v2";
+    const cachedCountKey = "portfolio_cached_view_count_v2";
+    const hasVisitedThisSession = typeof window !== "undefined" ? sessionStorage.getItem(sessionKey) : null;
 
-    // Initial fallback from localStorage or baseline
-    const savedLocal = localStorage.getItem(cachedCountKey);
+    // Initial fallback from localStorage
+    const savedLocal = typeof window !== "undefined" ? localStorage.getItem(cachedCountKey) : null;
     if (savedLocal) {
       setCount(parseInt(savedLocal, 10));
     }
@@ -27,15 +27,15 @@ export function VisitorCounter() {
           if (data && typeof data.count === "number") {
             setCount(data.count);
             localStorage.setItem(cachedCountKey, data.count.toString());
-            // Mark session as visited so subsequent reloads in the same session don't increment
+            // Mark session as visited so page reloads/refreshes in this session don't increment
             if (shouldIncrement) {
               sessionStorage.setItem(sessionKey, "true");
             }
           }
         }
       } catch {
-        if (!count && !savedLocal) {
-          setCount(21030);
+        if (count === null && !savedLocal) {
+          setCount(0);
         }
       }
     }
@@ -48,7 +48,7 @@ export function VisitorCounter() {
       className="flex items-center gap-1.5 text-zinc-600 dark:text-zinc-400 select-none text-[13px] sm:text-[14px] font-medium"
       title="Total visits"
     >
-      {/* Eye icon matching the reference design */}
+      {/* Eye icon */}
       <svg
         className="w-4 h-4 text-zinc-500 dark:text-zinc-400"
         viewBox="0 0 24 24"
@@ -69,7 +69,7 @@ export function VisitorCounter() {
         />
       </svg>
       <span className="tabular-nums">
-        {count !== null ? count.toLocaleString() : "21,030"}
+        {count !== null ? count.toLocaleString() : "0"}
       </span>
     </div>
   );

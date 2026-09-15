@@ -115,28 +115,32 @@ export function AboutSection() {
             </SocialHoverCard>
           ))}
 
-          {/* Direct Gmail mailto button (no hover effect) */}
-          <SoftPillButton
-            as="a"
-            href="mailto:shreyas.nalle7@gmail.com"
-            variant="secondary"
-            className="px-3 py-1.5 !text-[12px] cursor-pointer inline-flex items-center"
-          >
-            <div className="flex items-center gap-1.5 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
-              <svg
-                viewBox="0 0 24 24"
-                className="w-3.5 h-3.5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              <span>Gmail</span>
-            </div>
-          </SoftPillButton>
+          {/* Direct Gmail compose button with hover card */}
+          <SocialHoverCard socialName="Gmail">
+            <SoftPillButton
+              as="a"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=shreyas.nalle7@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="secondary"
+              className="px-3 py-1.5 !text-[12px] cursor-pointer inline-flex items-center"
+            >
+              <div className="flex items-center gap-1.5 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-3.5 h-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span>Gmail</span>
+              </div>
+            </SoftPillButton>
+          </SocialHoverCard>
         </div>
       </div>
     </section>
