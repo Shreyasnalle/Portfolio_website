@@ -15,14 +15,14 @@ import bannerImg from "@/images/banner.png";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen w-full overflow-x-hidden bg-white dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100">
+    <main className="relative min-h-screen w-full overflow-x-hidden bg-white dark:bg-[#121215] text-zinc-900 dark:text-zinc-100">
       {/* Main Column bounded inside responsive container */}
       <div className="relative w-full max-w-[768px] mx-auto flex flex-col z-20 pb-16">
         {/* Blueprint Grid Lines (Vertical Micro Dots + 22vh Baseline + Nodes) */}
         <BlueprintGrid />
 
         {/* Block 1: Panoramic Banner (Height 22vh, exact cloned repo blur & fade values) */}
-        <div className="relative h-[22vh] w-full overflow-hidden bg-white dark:bg-[#09090b] shadow-[0_4px_12px_rgba(2,6,23,0.04)] dark:shadow-none">
+        <div className="relative h-[22vh] w-full overflow-hidden bg-white dark:bg-[#121215] shadow-[0_4px_12px_rgba(2,6,23,0.04)] dark:shadow-none">
           <Image
             src={bannerImg}
             alt="Banner"
@@ -39,9 +39,9 @@ export default function Home() {
           <BannerWind />
 
           {/* Smooth perimeter fade gradients (half width, gentle fade) */}
-          <div className="absolute inset-x-0 bottom-0 h-5 pointer-events-none z-[5] bg-gradient-to-t from-white/50 via-white/15 to-transparent dark:from-[#09090b]/60 dark:via-[#09090b]/20 dark:to-transparent" />
-          <div className="absolute left-0 top-0 bottom-0 w-4 pointer-events-none z-20 bg-gradient-to-r from-white/45 via-white/15 to-transparent dark:from-[#09090b]/60 dark:via-[#09090b]/20 dark:to-transparent" />
-          <div className="absolute right-0 top-0 bottom-0 w-4 pointer-events-none z-20 bg-gradient-to-l from-white/45 via-white/15 to-transparent dark:from-[#09090b]/60 dark:via-[#09090b]/20 dark:to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-5 pointer-events-none z-[5] bg-gradient-to-t from-white/50 via-white/15 to-transparent dark:from-[#121215]/60 dark:via-[#121215]/20 dark:to-transparent" />
+          <div className="absolute left-0 top-0 bottom-0 w-4 pointer-events-none z-20 bg-gradient-to-r from-white/45 via-white/15 to-transparent dark:from-[#121215]/60 dark:via-[#121215]/20 dark:to-transparent" />
+          <div className="absolute right-0 top-0 bottom-0 w-4 pointer-events-none z-20 bg-gradient-to-l from-white/45 via-white/15 to-transparent dark:from-[#121215]/60 dark:via-[#121215]/20 dark:to-transparent" />
         </div>
 
         {/* Gap between banner and menu bar with exactly 3 lines of dots */}

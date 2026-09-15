@@ -3,40 +3,79 @@ import fs from "fs";
 import path from "path";
 
 const CACHE_PATH = path.join(process.cwd(), "src/components/views-cache.json");
-const BASELINE_COUNT = 0;
+const VIEWS_KEY = "portfolio_total_views";
 
+// ── Vercel KV helper (optional: only used when KV env vars are present) ──────
+async function kvIncr(): Promise<number | null> {
+  if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
+    return null; // KV not configured, fall through to local file
+  }
+  try {
+    const { kv } = await import("@vercel/kv");
+    const newVal = await kv.incr(VIEWS_KEY);
+    return newVal;
+  } catch {
+    return null;
+  }
+}
+
+async function kvGet(): Promise<number | null> {
+  if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
+    return null;
+  }
+  try {
+    const { kv } = await import("@vercel/kv");
+    const val = await kv.get<number>(VIEWS_KEY);
+    return typeof val === "number" ? val : 0;
+  } catch {
+    return null;
+  }
+}
+
+// ── Local file fallback (works during `npm run dev`) ─────────────────────────
 function getLocalCount(): number {
   try {
     if (fs.existsSync(CACHE_PATH)) {
       const content = fs.readFileSync(CACHE_PATH, "utf8");
       const parsed = JSON.parse(content);
-      if (typeof parsed.views === "number") {
-        return parsed.views;
-      }
+      if (typeof parsed.views === "number") return parsed.views;
     }
   } catch {
-    // Ignore read errors
+    // ignore
   }
-  return BASELINE_COUNT;
+  return 0;
 }
 
 function saveLocalCount(count: number) {
   try {
     fs.writeFileSync(CACHE_PATH, JSON.stringify({ views: count }, null, 2), "utf8");
   } catch {
-    // Ignore write errors (e.g. read-only serverless environment)
+    // ignore (read-only serverless filesystem)
   }
 }
 
+// ── Route handler ─────────────────────────────────────────────────────────────
 export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
-  const shouldIncrement = searchParams.get("incr") === "true";
+  const shouldIncrement = request.nextUrl.searchParams.get("incr") === "true";
 
-  let currentCount = getLocalCount();
+  let currentCount: number;
 
   if (shouldIncrement) {
-    currentCount += 1;
-    saveLocalCount(currentCount);
+    const kvResult = await kvIncr();
+    if (kvResult !== null) {
+      currentCount = kvResult;
+    } else {
+      // local fallback
+      currentCount = getLocalCount() + 1;
+      saveLocalCount(currentCount);
+    }
+  } else {
+    const kvResult = await kvGet();
+    if (kvResult !== null) {
+      currentCount = kvResult;
+    } else {
+      currentCount = getLocalCount();
+    }
   }
 
   return NextResponse.json(

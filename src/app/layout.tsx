@@ -16,8 +16,15 @@ import { cn } from "@/lib/utils";
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Developer portfolio with blueprint dotted layout",
+  title: "Shreyas Nalle",
+  description: "Applied AI Engineer & Full Stack Developer",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
+      { url: "/favicon.jpg", sizes: "any", type: "image/jpeg" },
+    ],
+    apple: { url: "/favicon-192.jpg", type: "image/jpeg" },
+  },
 };
 
 export default function RootLayout({
@@ -31,7 +38,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn(GeistSans.variable, GeistMono.variable, GeistPixelSquare.variable, GeistPixelGrid.variable, GeistPixelCircle.variable, GeistPixelTriangle.variable, GeistPixelLine.variable, "font-sans", geist.variable)}
     >
-      <body className="min-h-screen bg-white dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 antialiased font-sans">
+      <body className="min-h-screen bg-white dark:bg-[#121215] text-zinc-900 dark:text-zinc-100 antialiased font-sans">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

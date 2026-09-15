@@ -36,11 +36,11 @@ export function TextureOverlay({
     >
       {/* Mask strips to cover BlueprintGrid's continuous background vertical dots within this gap */}
       <div
-        className="absolute top-0 bottom-0 bg-white dark:bg-[#09090b] hidden md:block pointer-events-none z-0"
+        className="absolute top-0 bottom-0 bg-white dark:bg-[#121215] hidden md:block pointer-events-none z-0"
         style={{ left: "-2px", width: "4px" }}
       />
       <div
-        className="absolute top-0 bottom-0 bg-white dark:bg-[#09090b] hidden md:block pointer-events-none z-0"
+        className="absolute top-0 bottom-0 bg-white dark:bg-[#121215] hidden md:block pointer-events-none z-0"
         style={{ right: "-2px", width: "4px" }}
       />
 

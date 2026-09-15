@@ -91,7 +91,7 @@ function ProjectCard({ project }: { project: ProjectItem }) {
       {/* Outer Wrapper with smooth hover animation */}
       <CardWrapper
         {...cardWrapperProps}
-        className="relative w-full aspect-[1.25] sm:aspect-[1.35] rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50/80 dark:bg-[#09090b]/80 shadow-sm p-3.5 pb-0 flex flex-col overflow-hidden transition-all duration-300 hover:shadow-md hover:border-black/20 dark:hover:border-white/20 cursor-pointer block"
+        className="relative w-full aspect-[1.25] sm:aspect-[1.35] rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50/80 dark:bg-[#121215]/80 shadow-sm p-3.5 pb-0 flex flex-col overflow-hidden transition-all duration-300 hover:shadow-md hover:border-black/20 dark:hover:border-white/20 cursor-pointer block"
       >
         <motion.div
           className="absolute inset-0 size-full"

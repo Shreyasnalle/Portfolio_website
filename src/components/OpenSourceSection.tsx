@@ -67,7 +67,7 @@ export function OpenSourceSection() {
         {/* Filter Toggle with sliding pill */}
         <div className="flex items-center gap-2 relative z-20 group self-start sm:self-auto">
           <div className="absolute -inset-[5px] border border-black/5 dark:border-white/5 rounded-[11px] pointer-events-none transition-colors duration-300 group-hover:border-black/10 dark:group-hover:border-white/10" />
-          <div className="relative grid grid-cols-3 p-1 bg-zinc-50 dark:bg-[#09090b] rounded-[6px] border border-black/10 dark:border-white/10 shadow-sm shadow-black/10 dark:shadow-lg dark:shadow-black/80 w-fit select-none">
+          <div className="relative grid grid-cols-3 p-1 bg-zinc-50 dark:bg-[#121215] rounded-[6px] border border-black/10 dark:border-white/10 shadow-sm shadow-black/10 dark:shadow-lg dark:shadow-black/80 w-fit select-none">
             {/* Sliding Pill Background */}
             <div
               className={`absolute top-1 bottom-1 left-1 w-[calc((100%-8px)/3)] rounded-[4px] bg-white dark:bg-[#1e1e20] border border-zinc-200/50 dark:border-zinc-800/50 shadow-sm transition-transform duration-300 ease-[cubic-bezier(0.33,1,0.68,1)] transform will-change-transform ${

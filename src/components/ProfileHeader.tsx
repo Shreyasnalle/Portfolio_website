@@ -40,7 +40,7 @@ export function ProfileHeader() {
           <div className="mt-2.5">
             <SoftPillButton
               as="a"
-              href="https://docs.google.com/document/d/1bNYe5B5Llx9AkRRcN-pI4qlhh26x9thvU4CFHuZqsjk/edit?usp=sharing"
+              href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               variant="secondary"
