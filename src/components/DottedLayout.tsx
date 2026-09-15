@@ -32,7 +32,7 @@ export function DottedLayout({
       {showDotMatrix && <DottedBackground />}
 
       {/* Blueprint Grid Lines & Micro Dots */}
-      {showBlueprintGrid && <BlueprintGrid />}
+      {showBlueprintGrid && <BlueprintGrid leftMargin="30%" rightMargin="30%" />}
 
       {/* Page Content Container */}
       <div className="relative z-10 w-full">{children}</div>

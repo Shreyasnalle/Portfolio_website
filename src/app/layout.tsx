@@ -27,12 +27,12 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${GeistSans.variable} ${GeistMono.variable} ${GeistPixelSquare.variable} ${GeistPixelGrid.variable} ${GeistPixelCircle.variable} ${GeistPixelTriangle.variable} ${GeistPixelLine.variable}`}
     >
-      <body className="min-h-screen bg-white text-zinc-900 antialiased font-sans">
+      <body className="min-h-screen bg-white dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 antialiased font-sans">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-          forcedTheme="light"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
           {children}
         </ThemeProvider>

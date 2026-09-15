@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { PixelHeading } from "@/components/ui/pixel-heading";
 import { DottedDivider } from "@/components/DottedDivider";
+import cachedData from "./github-contributions-cache.json";
 
 interface ContributionDay {
   contributionCount: number;
@@ -25,9 +26,41 @@ interface TooltipState {
 }
 
 export function GithubGraph() {
-  const [weeks, setWeeks] = useState<ContributionWeek[]>([]);
-  const [totalContributions, setTotalContributions] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const initialData = useMemo(() => {
+    try {
+      const currentYear = new Date().getFullYear();
+      const startOfYear = new Date(currentYear, 0, 1);
+      const start = new Date(startOfYear);
+      start.setDate(start.getDate() - start.getDay());
+
+      const generatedWeeks: ContributionWeek[] = [];
+      for (let w = 0; w < 53; w++) {
+        const days: ContributionDay[] = [];
+        for (let d = 0; d < 7; d++) {
+          const currentDate = new Date(start);
+          currentDate.setDate(start.getDate() + w * 7 + d);
+          const dateStr = currentDate.toISOString().slice(0, 10);
+          const dayData = (cachedData as any)?.days?.[dateStr];
+
+          days.push({
+            date: dateStr,
+            contributionCount: dayData ? dayData.count : 0,
+          });
+        }
+        generatedWeeks.push({ contributionDays: days });
+      }
+      return {
+        weeks: generatedWeeks,
+        total: (cachedData as any)?.totalContributions || 365,
+      };
+    } catch {
+      return { weeks: [], total: 0 };
+    }
+  }, []);
+
+  const [weeks, setWeeks] = useState<ContributionWeek[]>(() => initialData.weeks);
+  const [totalContributions, setTotalContributions] = useState(() => initialData.total);
+  const [loading, setLoading] = useState(false);
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
 
   useEffect(() => {
@@ -39,14 +72,11 @@ export function GithubGraph() {
           if (data?.days) {
             setTotalContributions(data.totalContributions || 0);
 
-            // Generate 53 weeks starting from 370 days ago
-            const today = new Date();
-            const start = new Date(today);
-            start.setDate(today.getDate() - 364);
-
-            // Align start date to Sunday
-            const dayOfWeek = start.getDay();
-            start.setDate(start.getDate() - dayOfWeek);
+            // Generate 53 weeks for current calendar year (Jan 1 - Dec 31)
+            const currentYear = new Date().getFullYear();
+            const startOfYear = new Date(currentYear, 0, 1);
+            const start = new Date(startOfYear);
+            start.setDate(start.getDate() - start.getDay());
 
             const generatedWeeks: ContributionWeek[] = [];
             for (let w = 0; w < 53; w++) {
@@ -79,9 +109,10 @@ export function GithubGraph() {
   }, []);
 
   const emptyWeeks = useMemo<ContributionWeek[]>(() => {
-    const today = new Date();
-    const start = new Date(today);
-    start.setDate(today.getDate() - 364);
+    const currentYear = new Date().getFullYear();
+    const startOfYear = new Date(currentYear, 0, 1);
+    const start = new Date(startOfYear);
+    start.setDate(start.getDate() - start.getDay());
 
     return Array.from({ length: 53 }, (_, weekIndex) => ({
       contributionDays: Array.from({ length: 7 }, (_, dayIndex) => {
@@ -98,11 +129,11 @@ export function GithubGraph() {
 
   const contributionLevels = useMemo<ContributionLevel[]>(
     () => [
-      { cell: "bg-zinc-100 dark:bg-zinc-800" },
-      { cell: "bg-zinc-300 dark:bg-zinc-600" },
-      { cell: "bg-zinc-500 dark:bg-zinc-500" },
-      { cell: "bg-zinc-700 dark:bg-zinc-300" },
-      { cell: "bg-zinc-950 dark:bg-zinc-100" },
+      { cell: "bg-zinc-200/90 dark:bg-zinc-800/90 border border-black/5 dark:border-white/5" },
+      { cell: "bg-zinc-400 dark:bg-zinc-600 border border-black/5 dark:border-white/5" },
+      { cell: "bg-zinc-600 dark:bg-zinc-400 border border-black/5 dark:border-white/5" },
+      { cell: "bg-zinc-800 dark:bg-zinc-200 border border-black/5 dark:border-white/5" },
+      { cell: "bg-zinc-950 dark:bg-zinc-50 border border-black/5 dark:border-white/5" },
     ],
     []
   );
@@ -136,51 +167,83 @@ export function GithubGraph() {
     });
   };
 
-  const defaultMonths = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+  const monthLabels = useMemo(() => {
+    const currentYear = new Date().getFullYear();
+    const startOfYear = new Date(currentYear, 0, 1);
+    const start = new Date(startOfYear);
+    start.setDate(start.getDate() - start.getDay());
+
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    const labels: { colIndex: number; name: string }[] = [];
+
+    for (let w = 0; w < 53; w++) {
+      for (let d = 0; d < 7; d++) {
+        const cd = new Date(start);
+        cd.setDate(start.getDate() + w * 7 + d);
+        if (cd.getFullYear() === currentYear && cd.getDate() === 1) {
+          labels.push({
+            colIndex: w,
+            name: months[cd.getMonth()],
+          });
+        }
+      }
+    }
+
+    return labels;
+  }, []);
+
   const graphWeeks = weeks.length > 0 ? weeks : emptyWeeks;
+  const currentYear = new Date().getFullYear();
   const graphStatus = loading
     ? "Loading GitHub contribution activity"
-    : `${totalContributions} GitHub activities in the last year`;
+    : `${totalContributions} GitHub activities in ${currentYear}`;
 
   return (
-    <section className="relative z-10 w-full mt-4" aria-label="GitHub Activity">
+    <section className="relative z-10 w-full" aria-label="GitHub Activity">
       {/* Heading Container */}
-      <div className="py-2 flex items-center justify-between gap-3">
+      <div className="px-4 py-3 flex items-center justify-between gap-3">
         <PixelHeading
           mode="uniform"
           as="h3"
-          className="text-[16px] sm:text-[18px] font-bold text-zinc-800 dark:text-zinc-100 tracking-tight"
+          className="text-[16px] sm:text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"
         >
           GitHub Activity
         </PixelHeading>
-        <p className="text-right text-[11px] text-zinc-500 dark:text-zinc-400">
+        <p className="text-right text-[11px] font-medium text-zinc-600 dark:text-zinc-400">
           {graphStatus}
         </p>
       </div>
 
       {/* Dotted Divider under heading */}
-      <DottedDivider showNodes={false} />
+      <DottedDivider showNodes={true} />
 
       {/* Graph content */}
-      <div className="relative py-4">
+      <div className="relative px-4 py-4">
         <div className="w-full">
           <div>
-            <div className="mb-2 flex w-full justify-between text-[10px] text-zinc-400 dark:text-zinc-500">
-              {defaultMonths.map((month, index) => (
-                <span key={`${month}-${index}`}>{month}</span>
+            <div className="mb-2 grid grid-cols-[repeat(53,minmax(0,1fr))] text-[10px] text-zinc-600 dark:text-zinc-400 font-medium">
+              {monthLabels.map((m) => (
+                <span
+                  key={`${m.name}-${m.colIndex}`}
+                  style={{ gridColumnStart: m.colIndex + 1 }}
+                  className="col-span-4 whitespace-nowrap overflow-visible"
+                >
+                  {m.name}
+                </span>
               ))}
             </div>
 
@@ -195,7 +258,7 @@ export function GithubGraph() {
                       {Array.from({ length: 7 }).map((__, rowIndex) => (
                         <div
                           key={rowIndex}
-                          className="aspect-square w-full animate-pulse rounded-[2px] bg-zinc-100 dark:bg-zinc-800"
+                          className="aspect-square w-full animate-pulse rounded-[2px] bg-zinc-200/90 dark:bg-zinc-800/90 border border-black/5 dark:border-white/5"
                         />
                       ))}
                     </div>
@@ -223,7 +286,7 @@ export function GithubGraph() {
         </div>
 
         <div className="mt-3 flex items-center justify-between gap-3">
-          <span className="text-[11px] text-zinc-500 dark:text-zinc-400">
+          <span className="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">
             Less active
           </span>
           <div className="flex shrink-0 items-center gap-1.5">
@@ -234,7 +297,7 @@ export function GithubGraph() {
                 className={`size-2 rounded-[2px] opacity-80 dark:opacity-70 ${level.cell}`}
               />
             ))}
-            <span className="text-[11px] text-zinc-500 dark:text-zinc-400">
+            <span className="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">
               More active
             </span>
           </div>

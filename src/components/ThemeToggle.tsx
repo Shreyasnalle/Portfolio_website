@@ -4,7 +4,7 @@ import * as React from "react";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
 
-export function ThemeToggle() {
+export function ThemeToggle({ className = "" }: { className?: string }) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
@@ -14,7 +14,7 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="h-8 w-8 rounded-full border border-black/10 dark:border-white/15" />
+      <div className={`h-7 w-7 rounded-full border border-black/10 dark:border-white/15 ${className}`} />
     );
   }
 
@@ -23,10 +23,10 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 bg-white/80 p-2 text-zinc-700 shadow-sm backdrop-blur transition-colors hover:bg-black/5 dark:border-white/15 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:bg-white/10"
+      className={`flex h-7 w-7 items-center justify-center rounded-full border border-black/15 bg-zinc-50/50 text-zinc-600 transition-colors hover:text-black hover:border-black/30 hover:bg-zinc-100 dark:border-white/15 dark:bg-zinc-900/50 dark:text-zinc-400 dark:hover:text-white dark:hover:border-white/30 dark:hover:bg-zinc-800 cursor-pointer shadow-[0_1px_2px_rgba(0,0,0,0.04)] ${className}`}
       aria-label="Toggle theme"
     >
-      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      {isDark ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
     </button>
   );
 }

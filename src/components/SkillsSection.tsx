@@ -40,15 +40,15 @@ export function SkillsSection() {
       <div className="px-4 py-3">
         <PixelHeading
           mode="uniform"
-          as="h2"
-          className="text-[18px] sm:text-[20px] font-bold text-zinc-800 dark:text-zinc-100 tracking-tight"
+          as="h3"
+          className="text-[16px] sm:text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"
         >
           Skills and Technologies
         </PixelHeading>
       </div>
 
-      {/* Dotted Divider below heading */}
-      <DottedDivider showNodes={false} />
+      {/* Dotted Divider below heading with intersection nodes */}
+      <DottedDivider showNodes={true} />
 
       {/* Clean Monochrome Cards Grid (Matching Cloned Repo) */}
       <div className="px-4 py-4">
@@ -56,7 +56,7 @@ export function SkillsSection() {
           {skills.map((skill, index) => (
             <div
               key={index}
-              className="grow flex items-center justify-center gap-2 px-3 py-1.5 bg-zinc-50 hover:bg-zinc-100 dark:bg-[#0a0a0a] dark:hover:bg-[#121214] border border-black/20 dark:border-white/[0.15] rounded-[6px] transition-colors duration-200 cursor-default"
+              className="grow flex items-center justify-center gap-2 px-3 py-1.5 bg-zinc-100/90 hover:bg-zinc-200/80 dark:bg-[#0a0a0a] dark:hover:bg-[#121214] border border-black/15 dark:border-white/[0.15] rounded-[6px] transition-colors duration-200 cursor-default shadow-[0_1px_2px_rgba(0,0,0,0.02)]"
             >
               <img
                 src={
@@ -73,16 +73,19 @@ export function SkillsSection() {
                   skill.icon.startsWith("http") ? "rounded-sm grayscale" : ""
                 }`}
               />
-              <span className="text-[13px] font-medium text-zinc-600 dark:text-zinc-400">
+              <span className="text-[13px] font-medium text-zinc-800 dark:text-zinc-300">
                 {skill.name}
               </span>
             </div>
           ))}
         </div>
-
-        {/* GitHub Activity Heatmap */}
-        <GithubGraph />
       </div>
+
+      {/* Dotted Divider above GitHub Activity with intersection nodes */}
+      <DottedDivider showNodes={true} />
+
+      {/* GitHub Activity Heatmap */}
+      <GithubGraph />
     </section>
   );
 }

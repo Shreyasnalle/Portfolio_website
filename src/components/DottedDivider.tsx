@@ -13,7 +13,7 @@ export function DottedDivider({
   showNodes = true,
 }: DottedDividerProps) {
   return (
-    <div className="relative h-0 w-full">
+    <div className="relative z-30 h-0 w-full">
       {/* Horizontal Micro-Dotted Line */}
       <div
         className={cn(

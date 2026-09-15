@@ -12,33 +12,38 @@ export function AboutSection() {
         <PixelHeading
           mode="uniform"
           as="h2"
-          className="text-[18px] sm:text-[20px] font-bold text-zinc-800 dark:text-zinc-100 tracking-tight"
+          className="text-[16px] sm:text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"
         >
           About
         </PixelHeading>
       </div>
 
       {/* Dotted Divider below About heading */}
-      <DottedDivider showNodes={false} />
+      <DottedDivider showNodes={true} />
 
       {/* Content Container */}
       <div className="px-4 py-4 flex flex-col gap-3 font-sans">
-        <p className="text-[14px] sm:text-[15px] text-zinc-600 dark:text-zinc-300 leading-relaxed">
-          1. I work around Applied AI, building production ready AI integrated software applications. Cloud models are not efficient enough for various use cases, curating it to work specific production software applications is what I work on. Apart from building ai applications I work on solving real world models as well.
-        </p>
-        <p className="text-[14px] sm:text-[15px] text-zinc-600 dark:text-zinc-300 leading-relaxed">
-          2. Tech is evolving everyday, adapting with it is the real challenge right now.
-        </p>
-        <p className="text-[14px] sm:text-[15px] text-zinc-600 dark:text-zinc-300 leading-relaxed">
-          3. Apart for tech and coding I am into finance and nature.
-        </p>
+        <ul className="text-[14px] sm:text-[15px] text-zinc-700 dark:text-zinc-300 leading-relaxed space-y-2">
+          <li className="flex gap-1.5">
+            <span className="text-zinc-500 dark:text-zinc-400">•</span>
+            <span>I work around Applied AI, building production ready AI integrated software applications. Cloud models are not efficient enough for various use cases, curating it to work specific production software applications is what I work on. Apart from building ai applications I work on solving real world models as well.</span>
+          </li>
+          <li className="flex gap-1.5">
+            <span className="text-zinc-500 dark:text-zinc-400">•</span>
+            <span>Tech is evolving everyday, adapting with it is the real challenge right now.</span>
+          </li>
+          <li className="flex gap-1.5">
+            <span className="text-zinc-500 dark:text-zinc-400">•</span>
+            <span>Apart for tech and coding I am into finance and nature.</span>
+          </li>
+        </ul>
 
         {/* Connect Section */}
         <div id="contact" className="mt-4">
           <PixelHeading
             mode="uniform"
             as="h3"
-            className="text-[16px] sm:text-[18px] font-bold text-zinc-800 dark:text-zinc-100 tracking-tight mb-3"
+            className="text-[16px] sm:text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight mb-3"
           >
             Connect
           </PixelHeading>
