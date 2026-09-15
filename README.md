@@ -1,6 +1,6 @@
-# Shreyas Nalle — Personal Portfolio Website
+# Shreyas Nalle
 
-A high-performance, pixel-perfect personal portfolio website built with **Next.js 15**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**. Features a distinctive **blueprint micro-grid aesthetic**, custom Web Audio theme sound effects, interactive project cards, real-time GitHub activity heatmaps, rotating encrypted quotes, and full responsive layout stabilization across all device screens.
+Welcome to a small corner of internet, which speaks about me.
 
 ---
 
@@ -105,15 +105,6 @@ npm -v
 
 ---
 
-## Scripts Overview
-
-- `npm run dev`: Runs the Next.js development server with Turbopack.
-- `npm run build`: Compiles and builds the production application.
-- `npm run start`: Starts the Next.js production server.
-- `npm run lint`: Runs ESLint to check for code quality and syntax errors.
-
----
-
 ## Tech Stack & Tools
 
 - **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
@@ -123,5 +114,3 @@ npm -v
 - **UI Components**: [Radix UI Hover Card](https://www.radix-ui.com/), Custom Micro-Interactions
 - **Icons**: [Simple Icons](https://simpleicons.org/) CDN & Lucide Icons
 - **Audio**: Web Audio API Sound Synthesizer
-
----
